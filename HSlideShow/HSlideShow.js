@@ -1,6 +1,6 @@
 var pages = [];
 var targetHorizontalScroll = 0;
-
+var targetPage;
 
 
 
@@ -17,34 +17,104 @@ function Init()
         console.log("x:" + pages[i].x + " y:" + pages[i].y);
     }
     RefreshPages();
+    targetPage = pages[0];
 }
 
 function OnKeyDown(e)
 {
     if(e.code == "ArrowRight")
     {
-        if(targetHorizontalScroll != window.innerWidth * pages.length - window.innerWidth)
-        {
-            targetHorizontalScroll += window.innerWidth;
-        }
-        
-        
+        ChangePage("right");
     }
     if(e.code == "ArrowLeft")
     {
-        if(targetHorizontalScroll != window.innerWidth);
-        {
-            targetHorizontalScroll -= window.innerWidth;
-        }
-        
+        ChangePage("left");
+    }
+    if(e.code == "ArrowDown")
+    {
+        ChangePage("down");
+    }
+    if(e.code == "ArrowUp")
+    {
+        ChangePage("up");
     }
     
 }
 
+function ChangePage(direction)
+{
+    if(direction == "right")
+    {
+        if(GetPage(Number(targetPage.x) +1, targetPage.y) != null)
+        {
+            targetPage = GetPage(Number(targetPage.x) +1 , 0);
+            console.log("PageChnaged");
+        }
+        else
+        {
+            console.log("null page");
+        }
+    }
+    if(direction == "left")
+    {
+        if(GetPage(Number(targetPage.x) -1, targetPage.y) != null)
+        {
+            targetPage = GetPage(Number(targetPage.x) -1 , 0);
+            console.log("PageChnaged");
+        }
+        else
+        {
+            console.log("null page");
+        }
+    }
+    if(direction == "down")
+    {
+        if(GetPage(Number(targetPage.x), Number(targetPage.y) +1) != null)
+        {
+            targetPage = GetPage(Number(targetPage.x), Number(targetPage.y) +1);
+            console.log("PageChnaged");
+        }
+        else
+        {
+            console.log("null page");
+        }
+    }
+    if(direction == "up")
+    {
+        if(GetPage(Number(targetPage.x), Number(targetPage.y) -1) != null)
+        {
+            targetPage = GetPage(Number(targetPage.x), Number(targetPage.y) -1);
+            console.log("PageChnaged");
+        }
+        else
+        {
+            console.log("null page");
+        }
+    }
+}
+
+function GetPage(x,y)
+{
+    for (let i = 0; i < pages.length; i++) 
+    {
+        if(pages[i].x == x && pages[i].y == y)
+        {
+            console.log("Page found!");
+            
+            return pages[i];
+        }
+    }
+    console.log("page not found")
+}
+
+
 setInterval(Update, 1);
 function Update()
 {
-    window.scrollTo(targetHorizontalScroll, 0);
+    if(targetPage != null)
+    {
+        window.scrollTo(targetPage.x * window.innerWidth, targetPage.y * window.innerHeight);
+    }
 }
 
 
