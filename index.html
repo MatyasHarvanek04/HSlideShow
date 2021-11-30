@@ -4,10 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="/HSlideShow/HSlideShow.js"></script>
+    <script src="HSlideShow/HSlideShow.js"></script>
+    <link rel="stylesheet" href="Style.css">
     <title>HSlideShow Sample</title>
 </head>
-<body>
-    
+<body onload="Init();" onresize="RefreshPages()" onkeydown="OnKeyDown(event)">
+
+    <div id="P0-0" class="page"> page 1</div>
+    <div id="P1-0" class="page"> page 2</div>
+    <div id="P2-0" class="page"> page 3</div>
+    <div id="P3-0" class="page"> page 4</div>
+    <div id="P3-1" class="page"> page 4</div>
+    <div id="P4-0" class="page"> page 5</div>
+    <div id="P5-0" class="page"> page 6</div>
+    <div id="P6-0" class="page"> page 7</div>
+
 </body>
 </html>
