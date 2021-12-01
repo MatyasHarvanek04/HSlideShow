@@ -24,8 +24,8 @@ function Init()
     {
         console.log("x:" + pages[i].x + " y:" + pages[i].y);
     }
-    RefreshPages();
     targetPage = StartPage;
+    RefreshPages();
 }
 
 function OnKeyDown(e)
