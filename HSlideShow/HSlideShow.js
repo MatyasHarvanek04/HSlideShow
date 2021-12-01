@@ -30,6 +30,7 @@ function Init()
     targetScrollX = StartPage.RealX;
     targetScrollY = StartPage.RealY;
     RefreshPages();
+    
 }
 
 function OnKeyDown(e)
@@ -87,8 +88,8 @@ function GetPage(x,y)
     }
 }
 
-
 setInterval(Update, 1);
+
 function Update()
 {
     if(targetScrollX != targetPage.RealX)
@@ -97,7 +98,6 @@ function Update()
         if(Math.abs(targetScrollX - targetPage.RealX) < 0.5)
         {
             targetScrollX = targetPage.RealX;
-            window.scroll(targetScrollX , targetScrollY);
         }
     }
     if(targetScrollY != targetPage.RealY)
@@ -106,7 +106,6 @@ function Update()
         if(Math.abs(targetScrollY - targetPage.RealY) < 0.5)
         {
             targetScrollY = targetPage.RealY;
-            window.scroll(targetScrollX , targetScrollY);
         }
     }
     if(targetPage != null)
@@ -152,6 +151,5 @@ class Page
         this.div.style.height = window.innerHeight + "px";
         this.RealX = this.x * window.innerWidth;
         this.RealY = this.y * window.innerHeight;
-        console.log(this.div.style.left);
     }
 }
