@@ -24,27 +24,6 @@ function OnKeyDown(e)
 {
     if(e.code == "ArrowRight")
     {
-        ChangePage("right");
-    }
-    if(e.code == "ArrowLeft")
-    {
-        ChangePage("left");
-    }
-    if(e.code == "ArrowDown")
-    {
-        ChangePage("down");
-    }
-    if(e.code == "ArrowUp")
-    {
-        ChangePage("up");
-    }
-    
-}
-
-function ChangePage(direction)
-{
-    if(direction == "right")
-    {
         if(GetPage(Number(targetPage.x) +1, targetPage.y) != null)
         {
             targetPage = GetPage(Number(targetPage.x) +1 , 0);
@@ -55,7 +34,7 @@ function ChangePage(direction)
             console.log("null page");
         }
     }
-    if(direction == "left")
+    if(e.code == "ArrowLeft")
     {
         if(GetPage(Number(targetPage.x) -1, targetPage.y) != null)
         {
@@ -67,7 +46,7 @@ function ChangePage(direction)
             console.log("null page");
         }
     }
-    if(direction == "down")
+    if(e.code == "ArrowDown")
     {
         if(GetPage(Number(targetPage.x), Number(targetPage.y) +1) != null)
         {
@@ -79,7 +58,7 @@ function ChangePage(direction)
             console.log("null page");
         }
     }
-    if(direction == "up")
+    if(e.code == "ArrowUp")
     {
         if(GetPage(Number(targetPage.x), Number(targetPage.y) -1) != null)
         {
@@ -91,6 +70,12 @@ function ChangePage(direction)
             console.log("null page");
         }
     }
+    
+}
+
+function ChangePage(e.code)
+{
+    
 }
 
 function GetPage(x,y)
