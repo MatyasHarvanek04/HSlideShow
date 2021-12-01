@@ -6,18 +6,26 @@ var targetPage;
 
 function Init()
 {
+    var StartPage;
     var divs = document.getElementsByTagName("div");
     for (let i = 0; i < divs.length; i++) 
     {
-        var position = divs[i].id.split("-");
-        pages.push(new Page(position[0].substring(1), position[1], divs[i]));
+        if(divs[i].classList.contains("page"))
+        {
+            var position = divs[i].id.split("-");
+            pages.push(new Page(position[0].substring(1), position[1], divs[i]));
+            if(divs[i].classList.contains("startingPage"))
+            {
+                StartPage = pages[pages.length - 1];
+            }
+        }
     }
     for (let i = 0; i < pages.length; i++) 
     {
         console.log("x:" + pages[i].x + " y:" + pages[i].y);
     }
     RefreshPages();
-    targetPage = pages[0];
+    targetPage = StartPage;
 }
 
 function OnKeyDown(e)
@@ -27,11 +35,6 @@ function OnKeyDown(e)
         if(GetPage(Number(targetPage.x) +1, targetPage.y) != null)
         {
             targetPage = GetPage(Number(targetPage.x) +1 , 0);
-            console.log("PageChnaged");
-        }
-        else
-        {
-            console.log("null page");
         }
     }
     if(e.code == "ArrowLeft")
@@ -39,11 +42,6 @@ function OnKeyDown(e)
         if(GetPage(Number(targetPage.x) -1, targetPage.y) != null)
         {
             targetPage = GetPage(Number(targetPage.x) -1 , 0);
-            console.log("PageChnaged");
-        }
-        else
-        {
-            console.log("null page");
         }
     }
     if(e.code == "ArrowDown")
@@ -51,11 +49,6 @@ function OnKeyDown(e)
         if(GetPage(Number(targetPage.x), Number(targetPage.y) +1) != null)
         {
             targetPage = GetPage(Number(targetPage.x), Number(targetPage.y) +1);
-            console.log("PageChnaged");
-        }
-        else
-        {
-            console.log("null page");
         }
     }
     if(e.code == "ArrowUp")
@@ -63,11 +56,6 @@ function OnKeyDown(e)
         if(GetPage(Number(targetPage.x), Number(targetPage.y) -1) != null)
         {
             targetPage = GetPage(Number(targetPage.x), Number(targetPage.y) -1);
-            console.log("PageChnaged");
-        }
-        else
-        {
-            console.log("null page");
         }
     }
     
@@ -81,12 +69,9 @@ function GetPage(x,y)
     {
         if(pages[i].x == x && pages[i].y == y)
         {
-            console.log("Page found!");
-            
             return pages[i];
         }
     }
-    console.log("page not found")
 }
 
 
