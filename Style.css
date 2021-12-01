@@ -11,8 +11,8 @@ body, head
     position: absolute;
     background-color: red;
     color: white;
-    height: 100vh;
-    width: 100vw;
+    height: 50vh;
+    width: 50vw;
 }
 
 #P0-0
