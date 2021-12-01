@@ -147,8 +147,9 @@ class Page
     {
         this.div.style.left = (this.x * window.innerWidth) + "px";
         this.div.style.top = (this.y * window.innerHeight) + "px";
-        this.div.style.width = window.innerWidth + "px";
-        this.div.style.height = window.innerHeight + "px";
+        
+        //this.div.style.width = window.innerWidth + "px";
+        //this.div.style.height = window.innerHeight + "px";
         this.RealX = this.x * window.innerWidth;
         this.RealY = this.y * window.innerHeight;
     }
