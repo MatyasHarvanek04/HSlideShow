@@ -73,10 +73,7 @@ function OnKeyDown(e)
     
 }
 
-function ChangePage(e.code)
-{
-    
-}
+
 
 function GetPage(x,y)
 {
