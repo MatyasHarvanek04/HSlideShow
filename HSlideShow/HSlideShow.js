@@ -4,10 +4,27 @@ var targetPage;
 var targetScrollX;
 var targetScrollY;
 var lastPage;
+var MainDiv;
+
+var UpPage;
+var DownPage;
+var LeftPage;
+var RightPage;
+var Controlls;
+
+setTimeout(Init, 1);
+setTimeout(InitUpdate,2);
+
+function InitUpdate()
+{
+    setInterval(Update, 1);
+}
 
 
 function Init()
 {
+    Controlls = document.getElementById("Controlls")
+    MainDiv = document.getElementById("Presentation");
     var StartPage;
     var divs = document.getElementsByTagName("div");
     for (let i = 0; i < divs.length; i++) 
@@ -32,15 +49,13 @@ function Init()
     RefreshPages();
     
 }
-
 function OnKeyDown(e)
 {
-    
     if(e.code == "ArrowRight")
     {
         if(GetPage(Number(targetPage.x) +1, targetPage.y) != null)
         {
-            targetPage = GetPage(Number(targetPage.x) +1 , 0);
+            ChangePage(GetPage(Number(targetPage.x) +1 , 0));
             return;
         }
     }
@@ -48,7 +63,7 @@ function OnKeyDown(e)
     {
         if(GetPage(Number(targetPage.x) -1, targetPage.y) != null)
         {
-            targetPage = GetPage(Number(targetPage.x) -1 , 0);
+            ChangePage(GetPage(Number(targetPage.x) -1 , 0));
             return;
         }
     }
@@ -56,7 +71,7 @@ function OnKeyDown(e)
     {
         if(GetPage(Number(targetPage.x), Number(targetPage.y) +1) != null)
         {
-            targetPage = GetPage(Number(targetPage.x), Number(targetPage.y) +1);
+            ChangePage(GetPage(Number(targetPage.x), Number(targetPage.y) +1));
             return;
         }
     }
@@ -64,7 +79,7 @@ function OnKeyDown(e)
     {
         if(GetPage(Number(targetPage.x), Number(targetPage.y) -1) != null)
         {
-            targetPage = GetPage(Number(targetPage.x), Number(targetPage.y) -1);
+            ChangePage(GetPage(Number(targetPage.x), Number(targetPage.y) -1));
             return;
         }
         else
@@ -73,6 +88,11 @@ function OnKeyDown(e)
         }
     }
     
+}
+
+function ChangePage(page)
+{
+    targetPage = page;
 }
 
 
@@ -88,7 +108,7 @@ function GetPage(x,y)
     }
 }
 
-setInterval(Update, 1);
+
 
 function Update()
 {
@@ -110,9 +130,10 @@ function Update()
     }
     if(targetPage != null)
     {
-        window.scroll(targetScrollX , targetScrollY);
+        MainDiv.scroll(targetScrollX , targetScrollY);
     }
-    
+    //Controlls.style.left = Number(MainDiv. + ) + "px";
+    //Controlls.style.top = Number(MainDiv.scrollTop + MainDiv.clientHeight - Controlls.clientHeight) + "px";
 }
 
 function Lerp(start, end, t)
@@ -132,25 +153,24 @@ function RefreshPages()
 }
 
 
+
+
 class Page
 {
     constructor(x, y, div)
     {
         this.x = x;
         this.y = y;
-        this.RealX = this.x * window.innerWidth;
-        this.RealY = this.y * window.innerHeight;
+        this.RealX = this.x * MainDiv.clientWidth;
+        this.RealY = this.y * MainDiv.clientHeight;
         this.div = div;
     }
 
     Refresh()
     {
-        this.div.style.left = (this.x * window.innerWidth) + "px";
-        this.div.style.top = (this.y * window.innerHeight) + "px";
-        
-        //this.div.style.width = window.innerWidth + "px";
-        //this.div.style.height = window.innerHeight + "px";
-        this.RealX = this.x * window.innerWidth;
-        this.RealY = this.y * window.innerHeight;
+        this.div.style.left = (this.x * MainDiv.clientWidth) + "px";
+        this.div.style.top = (this.y * MainDiv.clientHeight) + "px";
+        this.RealX = this.x * MainDiv.clientWidth;
+        this.RealY = this.y * MainDiv.clientHeight;
     }
 }

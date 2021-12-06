@@ -2,22 +2,84 @@ body, head
 {
     padding: 0;
     margin: 0;
-    overflow-x: hidden;
-    overflow-y: hidden;
+    overflow: hidden;
 }
 
 .page 
 {
     position: absolute;
     background-color: red;
+    height: 100%;
+    width: 100%;
     color: white;
-    height: 50vh;
-    width: 50vw;
 }
 
 #P0-0
 {
     background-color: aqua;
+}
+
+#Presentation
+{
+    position: absolute;
+    left: 50vw;
+    top: 50vh;
+    width: 1000px;
+    height: 700px;
+    background-color: grey;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+}
+
+#Controlls
+{
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    position: sticky;
+}
+#InnerControlls
+{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    bottom: 5px;
+    right: 5px;
+}
+
+.Arrow
+{
+    position: absolute;
+    width: 15px;
+    height: 15px;
+}
+.Arrow.Left
+{
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.Arrow.Right
+{
+    right: 0;
+    top: 50%;
+    transform-origin: center;
+    transform: translateY(-50%) rotate(180deg) ;
+}
+.Arrow.Top
+{
+    top: 0;
+    left: 50%;
+    transform-origin: center;
+    transform: translateX(-50%) rotate(90deg) ;
+}
+.Arrow.Bottom
+{
+    bottom: 0;
+    left: 50%;
+    transform-origin: center;
+    transform: translateX(-50%) rotate(270deg) ;
 }
 
   
