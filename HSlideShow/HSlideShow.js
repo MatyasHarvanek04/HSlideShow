@@ -6,10 +6,10 @@ var targetScrollY;
 var lastPage;
 var MainDiv;
 
-var UpPageArrow;
-var DownPageArrow;
-var LeftPageArrow;
-var RightPageArrow;
+var UpArrow;
+var DownArrow;
+var LeftArrow;
+var RightArrow;
 
 
 class Page
@@ -42,7 +42,10 @@ function Init()
     //Getting DOM elemnts
     MainDiv = document.getElementById("Presentation");
     var divs = document.getElementsByTagName("div");
-    
+    LeftArrow = document.getElementById("Left");
+    RightArrow = document.getElementById("Right");
+    UpArrow = document.getElementById("Up");
+    DownArrow = document.getElementById("Down");
 
     //Loading Pages
     var StartPage;
@@ -60,15 +63,29 @@ function Init()
         }
     }
 
+    //Adding EventListeners
+    DownArrow.addEventListener("click", function () {SwitchPage("ArrowDown");});
+    UpArrow.addEventListener("click", function () {SwitchPage("ArrowUp");});
+    LeftArrow.addEventListener("click", function () {SwitchPage("ArrowLeft");});
+    RightArrow.addEventListener("click", function () {SwitchPage("ArrowRight");});
+
     //Init variables
     targetPage = StartPage;
     targetScrollX = StartPage.RealX;
     targetScrollY = StartPage.RealY;
     RefreshPages();
 }
+
+
+
 function OnKeyDown(e)
 {
-    if(e.code == "ArrowRight")
+    SwitchPage(e.code);
+}
+
+function SwitchPage(Code)
+{
+    if(Code == "ArrowRight")
     {
         if(GetPage(Number(targetPage.x) +1, targetPage.y) != null)
         {
@@ -76,7 +93,7 @@ function OnKeyDown(e)
             return;
         }
     }
-    if(e.code == "ArrowLeft")
+    if(Code == "ArrowLeft")
     {
         if(GetPage(Number(targetPage.x) -1, targetPage.y) != null)
         {
@@ -84,7 +101,7 @@ function OnKeyDown(e)
             return;
         }
     }
-    if(e.code == "ArrowDown")
+    if(Code == "ArrowDown")
     {
         if(GetPage(Number(targetPage.x), Number(targetPage.y) +1) != null)
         {
@@ -92,7 +109,7 @@ function OnKeyDown(e)
             return;
         }
     }
-    if(e.code == "ArrowUp")
+    if(Code == "ArrowUp")
     {
         if(GetPage(Number(targetPage.x), Number(targetPage.y) -1) != null)
         {
@@ -100,12 +117,28 @@ function OnKeyDown(e)
             return;
         }
     }
-    
 }
 
 function ChangePage(page)
 {
     targetPage = page;
+    UpdateArrows();
+}
+
+function UpdateArrows()
+{
+    console.log("jess");
+    if(GetPage(Number(targetPage.x) + 1, Number(targetPage.y)) != null) RightArrow.style.display = "block";
+    else RightArrow.style.display = "none";
+    if(GetPage(Number(targetPage.x) -1, Number(targetPage.y)) != null) LeftArrow.style.display = "block";
+    else LeftArrow.style.display = "none";
+    if(GetPage(Number(targetPage.x), Number(targetPage.y) - 1) != null) UpArrow.style.display = "block";
+    else UpArrow.style.display = "none";
+    if(GetPage(Number(targetPage.x), Number(targetPage.y) + 1) != null) DownArrow.style.display = "block";
+    else DownArrow.style.display = "none";
+        
+    
+
 }
 
 function GetPage(x,y)

@@ -5,6 +5,23 @@ body, head
     overflow: hidden;
 }
 
+img 
+{ 
+    -webkit-user-drag: none; 
+    -khtml-user-drag: none; 
+    -moz-user-drag: none; 
+    -o-user-drag: none; 
+    user-drag: none; 
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none; 
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
 .page 
 {
     position: absolute;
@@ -59,6 +76,14 @@ body, head
     position: absolute;
     width: 15px;
     height: 15px;
+    opacity: 0.6;
+    transition: 0.1s;
+}
+.Arrow:hover
+{
+    opacity: 1;
+    height: 25px;
+    width:  25px;
 }
 .Arrow.Left
 {
