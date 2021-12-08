@@ -18,6 +18,10 @@ body, head
 {
     background-color: aqua;
 }
+#P0-0-loaded
+{
+    background-color: brown;
+}
 
 #Presentation
 {
@@ -30,6 +34,8 @@ body, head
     transform: translate(-50%, -50%);
     overflow: hidden;
 }
+
+
 
 #Controlls
 {
@@ -81,5 +87,7 @@ body, head
     transform-origin: center;
     transform: translateX(-50%) rotate(270deg) ;
 }
+
+
 
   
