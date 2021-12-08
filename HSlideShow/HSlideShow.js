@@ -6,32 +6,52 @@ var targetScrollY;
 var lastPage;
 var MainDiv;
 
-var UpPage;
-var DownPage;
-var LeftPage;
-var RightPage;
-var Controlls;
+var UpPageArrow;
+var DownPageArrow;
+var LeftPageArrow;
+var RightPageArrow;
 
-setTimeout(Init, 1);
-setTimeout(InitUpdate,2);
 
-function InitUpdate()
+class Page
 {
-    setInterval(Update, 1);
+    constructor(x, y, div)
+    {
+        console.log("x: " +  x + " y: " + y);
+        this.x = x;
+        this.y = y;
+        this.RealX = Number(this.x * MainDiv.clientWidth);
+        this.RealY = this.y * MainDiv.clientHeight;
+        this.div = div;
+    }
+
+    Refresh()
+    {
+        this.div.style.left = (this.x * MainDiv.clientWidth) + "px";
+        this.div.style.top = (this.y * MainDiv.clientHeight) + "px";
+        this.RealX = this.x * MainDiv.clientWidth;
+        this.RealY = this.y * MainDiv.clientHeight;
+    }
 }
 
+Init();
+setInterval(Update, 1);
 
 function Init()
 {
-    Controlls = document.getElementById("Controlls")
+
+    //Getting DOM elemnts
     MainDiv = document.getElementById("Presentation");
-    var StartPage;
     var divs = document.getElementsByTagName("div");
+    
+
+    //Loading Pages
+    var StartPage;
     for (let i = 0; i < divs.length; i++) 
     {
         if(divs[i].classList.contains("page"))
         {
             var position = divs[i].id.split("-");
+            
             pages.push(new Page(position[0].substring(1), position[1], divs[i]));
             if(divs[i].classList.contains("startingPage"))
             {
@@ -39,15 +59,12 @@ function Init()
             }
         }
     }
-    for (let i = 0; i < pages.length; i++) 
-    {
-        console.log("x:" + pages[i].x + " y:" + pages[i].y);
-    }
+
+    //Init variables
     targetPage = StartPage;
     targetScrollX = StartPage.RealX;
     targetScrollY = StartPage.RealY;
     RefreshPages();
-    
 }
 function OnKeyDown(e)
 {
@@ -55,7 +72,7 @@ function OnKeyDown(e)
     {
         if(GetPage(Number(targetPage.x) +1, targetPage.y) != null)
         {
-            ChangePage(GetPage(Number(targetPage.x) +1 , 0));
+            ChangePage(GetPage(Number(targetPage.x) +1 ,Number(targetPage.y)));
             return;
         }
     }
@@ -63,7 +80,7 @@ function OnKeyDown(e)
     {
         if(GetPage(Number(targetPage.x) -1, targetPage.y) != null)
         {
-            ChangePage(GetPage(Number(targetPage.x) -1 , 0));
+            ChangePage(GetPage(Number(targetPage.x) -1 , Number(targetPage.y)));
             return;
         }
     }
@@ -82,10 +99,6 @@ function OnKeyDown(e)
             ChangePage(GetPage(Number(targetPage.x), Number(targetPage.y) -1));
             return;
         }
-        else
-        {
-            console.log("tessst");
-        }
     }
     
 }
@@ -94,8 +107,6 @@ function ChangePage(page)
 {
     targetPage = page;
 }
-
-
 
 function GetPage(x,y)
 {
@@ -107,8 +118,6 @@ function GetPage(x,y)
         }
     }
 }
-
-
 
 function Update()
 {
@@ -132,15 +141,12 @@ function Update()
     {
         MainDiv.scroll(targetScrollX , targetScrollY);
     }
-    //Controlls.style.left = Number(MainDiv. + ) + "px";
-    //Controlls.style.top = Number(MainDiv.scrollTop + MainDiv.clientHeight - Controlls.clientHeight) + "px";
 }
 
 function Lerp(start, end, t)
 {
     return start + (end - start) * t; 
 }
-
 
 function RefreshPages()
 {
@@ -153,24 +159,3 @@ function RefreshPages()
 }
 
 
-
-
-class Page
-{
-    constructor(x, y, div)
-    {
-        this.x = x;
-        this.y = y;
-        this.RealX = this.x * MainDiv.clientWidth;
-        this.RealY = this.y * MainDiv.clientHeight;
-        this.div = div;
-    }
-
-    Refresh()
-    {
-        this.div.style.left = (this.x * MainDiv.clientWidth) + "px";
-        this.div.style.top = (this.y * MainDiv.clientHeight) + "px";
-        this.RealX = this.x * MainDiv.clientWidth;
-        this.RealY = this.y * MainDiv.clientHeight;
-    }
-}
