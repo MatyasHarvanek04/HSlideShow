@@ -43,12 +43,11 @@ img
 #Presentation
 {
     position: absolute;
-    left: 50vw;
-    top: 50vh;
-    width: 1000px;
-    height: 700px;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
     background-color: grey;
-    transform: translate(-50%, -50%);
     overflow: hidden;
 }
 
@@ -60,6 +59,7 @@ img
     height: 100%;
     left: 0;
     top: 0;
+    pointer-events: none;
     position: sticky;
 }
 #InnerControlls
@@ -78,6 +78,7 @@ img
     height: 15px;
     opacity: 0.6;
     transition: 0.1s;
+    pointer-events: auto;
 }
 .Arrow:hover
 {

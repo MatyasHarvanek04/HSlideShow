@@ -1,3 +1,16 @@
+/*!
+ * HSlideShow.js
+ * Small js script for WebPresentation
+ * https://github.com/MatyasHarvanek04/HSlideShow
+ * @inspiration https://revealjs.com/
+ * @author Matyáš Harvánek 
+ * @author Martin Álló
+ * @author Jakub Holán
+ * Swiping provided by: John Doherty <www.johndoherty.info>
+ * https://github.com/john-doherty/swiped-events
+ * @license MIT
+ */
+
 var pages = [];
 var targetHorizontalScroll = 0;
 var targetPage;
@@ -68,14 +81,31 @@ function Init()
     UpArrow.addEventListener("click", function () {SwitchPage("ArrowUp");});
     LeftArrow.addEventListener("click", function () {SwitchPage("ArrowLeft");});
     RightArrow.addEventListener("click", function () {SwitchPage("ArrowRight");});
+    window.addEventListener("resize", RefreshPages);
+
 
     //Init variables
     targetPage = StartPage;
     targetScrollX = StartPage.RealX;
     targetScrollY = StartPage.RealY;
+
+    //Calling Refresh Methods
     RefreshPages();
+    UpdateArrows();
 }
 
+
+// Swiping
+document.addEventListener('swiped', function(e) 
+{
+    if(MainDiv.contains(e.target))
+    {
+        if(e.detail.dir == "down") SwitchPage("ArrowUp");
+        if(e.detail.dir == "up") SwitchPage("ArrowDown");
+        if(e.detail.dir == "right") SwitchPage("ArrowLeft");
+        if(e.detail.dir == "left") SwitchPage("ArrowRight");
+    }
+});
 
 
 function OnKeyDown(e)
